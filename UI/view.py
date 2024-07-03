@@ -30,8 +30,12 @@ class View(ft.UserControl):
         self._page.controls.append(self._title)
 
         #ROW with some controls
-        self.ddyear = ft.Dropdown(label="Anno")
-        self.ddshape = ft.Dropdown(label="Shape")
+        self.ddyear = ft.Dropdown(label="Anno", options=[ft.dropdown.Option(key="None",
+                                                            text="Nessun filtro")],
+                                                            on_change=self._controller.read_anno)
+        self.ddshape = ft.Dropdown(label="Shape", options=[ft.dropdown.Option(key="None",
+                                                            text="Nessun filtro")],
+                                                            on_change=self._controller.read_shape)
 
 
         # button for the "creat graph" reply
@@ -41,6 +45,7 @@ class View(ft.UserControl):
         self._page.controls.append(row1)
 
         self._controller.fillDD()
+        self._controller.fillDDShape()
 
         # List View where the reply is printed
         self.txt_result = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=True)
